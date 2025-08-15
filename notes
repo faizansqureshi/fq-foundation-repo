@@ -1,0 +1,18 @@
+EC2
+LB
+VPC
+VPCEP
+IAM
+S3
+
+create policy 
+then data policy
+deploy policy 
+
+
+- scp
+- permission boundry 
+- service quota
+- human access ( permissions sets)
+
+
