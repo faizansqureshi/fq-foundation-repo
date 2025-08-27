@@ -1,0 +1,40 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "iam:PassRole",
+      "Effect": "Allow",
+      "Resource": "*"
+     
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AttachVolume",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:Create*",
+        "ec2:Delete*",
+        "ec2:Describe*",
+        "ec2:DetachVolume",
+        "ec2:EnableFastSnapshotRestores",
+        "ec2:ModifyInstanceAttribute",
+        "ec2:ModifyVolume",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:RunInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:DeleteNetworkInterface",
+      "Resource": "*"
+      
+    },
+    {
+      "Action": "ssm:Get*",
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ]
+}
