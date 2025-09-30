@@ -1,0 +1,6 @@
+    bucket         = "tfstate-bootstrap-state-s13082025"
+    key            = "bootstrap/terraform.tfstate"
+    region         = "eu-west-1"
+    dynamodb_table = "terraformstate-locks-tfstate-s3082025"
+    encrypt        = true
+    profile        = "AWSMGMT"

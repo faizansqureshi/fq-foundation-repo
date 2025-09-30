@@ -39,7 +39,7 @@ resource "aws_iam_policy" "iam_read" {
 
 resource "aws_iam_policy" "iam_run" {
   count       = var.create_policy_resources ? 1 : 0
-  name        = "${var.policy_prefix}-iam-read"
+  name        = "${var.policy_prefix}-iam-run"
   description = "The iam read policy, to be used SDLC tooling in deploy policies"
   policy      = data.aws_iam_policy_document.iam_run.json
   tags        = merge({ "Creation Date" = timestamp(), "Workload" = "foundation" })
@@ -50,7 +50,7 @@ resource "aws_iam_policy" "iam_run" {
 
 resource "aws_iam_policy" "iam_write" {
   count       = var.create_policy_resources ? 1 : 0
-  name        = "${var.policy_prefix}-iam-read"
+  name        = "${var.policy_prefix}-iam-write"
   description = "The iam read policy, to be used SDLC tooling in deploy policies"
   policy      = data.aws_iam_policy_document.iam_write.json
   tags        = merge({ "Creation Date" = timestamp(), "Workload" = "foundation" })
@@ -58,3 +58,32 @@ resource "aws_iam_policy" "iam_write" {
     ignore_changes = [tags["Creation Date"]]
   }
 }
+
+#OUTPUT
+
+output "iam_read_policy_arn" {
+  value = try(aws_iam_policy.iam_read[0].arn, null)
+}
+
+output "iam_write_policy_arn" {
+  value = try(aws_iam_policy.iam_write[0].arn, null)
+}
+
+output "iam_run_policy_arn" {
+  value = try(aws_iam_policy.iam_run[0].arn, null)
+}
+
+
+
+output "iam_read_policy_json" {
+  value = data.aws_iam_policy_document.iam_read.json
+}
+
+output "iam_write_policy_json" {
+  value = data.aws_iam_policy_document.iam_write.json
+}
+
+output "iam_run_policy_json" {
+  value = data.aws_iam_policy_document.iam_run.json
+}
+
