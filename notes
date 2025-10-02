@@ -1,0 +1,35 @@
+EC2
+LB
+VPC
+VPCEP
+IAM
+S3
+
+create policy 
+then data policy
+deploy policy 
+
+
+- scp
+- permission boundry 
+- service quota
+- human access ( permissions sets)
+
+
+- check everything 
+
+need to understand this condition 
+ "aws:PrincipalArn": "arn:aws:*::*:*/AWSReservedSSO_${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+  and 
+
+  iam:PassedToService": [
+            "ec2.amazonaws.com"
+ resource "aws_iam_policy" "ec2_view"
+ what is local for ?
+
+
+ operate - condition we can add it later
+
+ first create policies simple
+ and then create a role by using that policies later we can think about restrictions
+ 

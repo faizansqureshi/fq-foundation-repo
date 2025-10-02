@@ -1,0 +1,88 @@
+
+{
+  "Statement": [
+    {
+      "Action": [
+        "iam:UpdateRole",
+        "iam:UpdateAssumeRolePolicy",
+        "iam:UntagPolicy",
+        "iam:DetachRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:DeleteRole",
+        "iam:DeletePolicyVersion",
+        "iam:DeletePolicy",
+        "iam:CreatePolicyVersion",
+        "iam:TagPolicy",
+        "iam:TagRole",
+        "iam:TagInstanceProfile"
+      ],
+        "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:PutRolePolicy",
+        "iam:PutRolePermissionsBoundary",
+        "iam:AttachRolePolicy"
+      ],
+       "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:CreateInstanceProfile",
+        "iam:CreatePolicy",
+        "iam:TagInstanceProfile",
+        "iam:TagPolicy",
+        "iam:TagRole",
+        "iam:UntagRole"
+      ],
+      
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": "iam:CreateRole",
+           "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Action": "iam:DeleteRolePermissionsBoundary",
+     
+      "Effect": "Deny",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "iam:CreatePolicyVersion",
+        "iam:DeletePolicyVersion",
+        "iam:DetachRolePolicy",
+        "iam:SetDefaultPolicyVersion"
+      ],
+      "Effect": "Deny",
+      "Resource": "*"
+    },
+    {
+      "Action": "iam:AttachRolePolicy",
+      "Condition": {
+        "StringEquals": {
+          "iam:PolicyArn": [
+            "arn:aws:iam::aws:policy/AdministratorAccess",
+            "arn:aws:iam::aws:policy/PowerUserAccess"
+          ]
+        }
+      },
+      "Effect": "Deny",
+      "Resource": "*"
+    },
+    {
+      "Action": [
+        "sts:TagSession",
+        "sts:GetServiceBearerToken"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    }
+  ],
+  "Version": "2012-10-17"
+}

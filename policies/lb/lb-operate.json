@@ -1,0 +1,25 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowLoadBalancerOperateWithCondition",
+      "Effect": "Allow",
+      "Action": [
+        "elasticloadbalancing:SetSecurityGroups",
+        "elasticloadbalancing:SetIpAddressType",
+        "elasticloadbalancing:ModifyListener",
+        "elasticloadbalancing:ModifyRule",
+        "elasticloadbalancing:ModifyTargetGroup",
+        "elasticloadbalancing:ModifyLoadBalancerAttributes",
+        "elasticloadbalancing:ModifyTargetGroupAttributes"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowSetRulePrioritiesWithoutCondition",
+      "Effect": "Allow",
+      "Action": "elasticloadbalancing:SetRulePriorities",
+      "Resource": "*"
+    }
+  ]
+}
