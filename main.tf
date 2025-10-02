@@ -1,4 +1,4 @@
-module "dev_workload" {
+module "workload" {
     source = "./modules/workloads"
  role_name = var.role_name
  github_repos = var.github_repos

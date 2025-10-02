@@ -1,7 +1,5 @@
 #trust policy this is just the read trust policy nothing created can attach it to any role
 
-
-
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy_document" "github_assume_role_policy" {

@@ -18,3 +18,7 @@ variable "region"{
 variable "profile"{
 
 }
+
+variable "policies"{
+
+}

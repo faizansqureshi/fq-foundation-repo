@@ -12,11 +12,23 @@ terraform {
 
 }
 
+provider "aws" {
+  region  = "eu-west-1"
+  profile = "fq-personal-network"
+  alias   = "fq-personal-network"
+}
 
 provider "aws" {
-  region  =  var.region
- profile = var.profile
+  region  = "eu-west-1"
+  profile = "fq-dev"
+  alias   = "fq-dev"
 }
+
+provider "aws" {
+  region  = var.region
+  profile = var.profile
+}
+
 
 
 terraform {

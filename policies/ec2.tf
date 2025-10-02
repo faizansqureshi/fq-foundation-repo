@@ -4,21 +4,21 @@
 
 data "aws_iam_policy_document" "ec2_read" {
 # source_policy_documents = [[file("${path.root}./policies/ec2/ec2-read.json")]]
- source_policy_documents = [file("${path.root}./policies/ec2/ec2-read.json")]
+ source_policy_documents = [file("${path.root}/policies/ec2/ec2-read.json")]
 
                     
 }
 
 data "aws_iam_policy_document" "ec2_write" {
-source_policy_documents = [file("${path.root}./policies/ec2/ec2-write.json")]
+source_policy_documents = [file("${path.root}/policies/ec2/ec2-write.json")]
 }
 
 data "aws_iam_policy_document" "ec2_run" {
-  source_policy_documents = [file("${path.root}./policies/ec2/ec2-run.json")]
+  source_policy_documents = [file("${path.root}/policies/ec2/ec2-run.json")]
 }
 
 data "aws_iam_policy_document" "ec2_operate" {
-  source_policy_documents = [file("${path.root}./policies/ec2/ec2-operate.json")]
+  source_policy_documents = [file("${path.root}/policies/ec2/ec2-operate.json")]
 }
 
 

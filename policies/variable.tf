@@ -9,3 +9,4 @@ variable "create_policy_resources" {
   type        = bool
   default     = true
 }
+

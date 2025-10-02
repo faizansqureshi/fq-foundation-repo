@@ -4,17 +4,15 @@
 
 
 module "policies" {
-  source = "../policies"
+  source = "../../policies"
 }
 
 module "role" {
-  source             = "../modules/roles"
+  source             = "../roles"
   role_name          = "${var.role_name}"
   role_description   = "The role is for account deployment"
   role_assume_policy = data.aws_iam_policy_document.github_assume_role_policy.json
-  role_managed_policy_arns = [
-    module.dev_policies.ec2_write_policy_arn, module.dev_policies.s3_write_policy_arn
-  ]
-
+  role_managed_policy_arns = local.policies_arns
+depends_on = [ module.policies ]
 }
 
