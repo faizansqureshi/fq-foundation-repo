@@ -13,3 +13,7 @@ variable "policies" {
   
 }
 
+variable "create_policy_resources" {
+  
+}
+

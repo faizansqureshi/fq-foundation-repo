@@ -1,1 +1,0 @@
-arn:aws:iam::865712988430:oidc-provider/token.actions.githubusercontent.com
