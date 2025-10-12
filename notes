@@ -33,3 +33,7 @@ need to understand this condition
  first create policies simple
  and then create a role by using that policies later we can think about restrictions
  
+
+ try SCP and permission sets
+ # git using the role i have to deploy these iam roles 
+ # 
