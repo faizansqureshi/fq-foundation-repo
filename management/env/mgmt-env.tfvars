@@ -1,5 +1,5 @@
-region = "us-west-1"
-profile = "MGMT"
+region = "eu-west-1"
+profile = "AWSMGMT"
 
 name = "mgmt-permission-set"
 managed_policy_arns = [
