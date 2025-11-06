@@ -18,7 +18,3 @@ identifier = ["arn:aws:iam::963374505049:oidc-provider/token.actions.githubuserc
 policies = ["fq-ec2-run","fq-ec2-read","fq-ec2-write"]
 }}
 
-name = "Dev-Permission-Set"
-managed_policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
-#custom_policy_names = ["fq-s3-read","fq-ec2-operate"]       
-#inline_policy = null            
