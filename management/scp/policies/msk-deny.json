@@ -1,0 +1,25 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyCreateMSKClusters",
+      "Effect": "Deny",
+      "Action": [
+        "kafka:CreateCluster",
+        "kafka:CreateClusterV2",
+        "kafka:CreateConfiguration",
+        "kafka:CreateVpcConnection"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyMSKConnectCreate",
+      "Effect": "Deny",
+      "Action": [
+        "kafkaconnect:CreateConnector",
+        "kafkaconnect:CreateWorkerConfiguration"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
