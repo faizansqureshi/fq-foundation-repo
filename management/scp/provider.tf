@@ -23,7 +23,7 @@ terraform {
   backend "s3" {
     
     bucket         = "fq-mgmt-terraform-state-bucket"
-    key            = "bootstrap/terraform.tfstate"
+    key            = "scp/terraform.tfstate"
     region         = "eu-west-1"
     dynamodb_table = "state_dynamo_db"
     encrypt        = true
