@@ -8,6 +8,7 @@ module permission-sets {
 
 }
 
+# permission set to account assignment  
 module "account_permissions" {
   for_each = var.permission-sets
   source = "../../modules/account-permissions"
