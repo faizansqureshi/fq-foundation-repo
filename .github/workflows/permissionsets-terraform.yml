@@ -1,0 +1,97 @@
+name: PR Permissionsets Terraform Checks
+
+on:
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'management/permissionsets/**'
+
+jobs:
+ 
+  fmt:
+    name: Terraform fmt (check)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.7'
+
+      - name: Run terraform fmt check
+        run: |
+          terraform --version
+          terraform fmt -check -diff
+
+  lint:
+    name: TFLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.7'
+
+      - name: Set up TFLint
+        uses: terraform-linters/setup-tflint@v1
+        with:
+          version: latest
+
+      - name: Run tflint
+        run: |
+          tflint
+
+  init:
+    name: Terraform init
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.7'
+
+      - name: Run terraform init
+        run: |
+          terraform init -backend-config=env/mgmt-env.tfbackend
+
+  validate:
+    name: Terraform validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.7'
+
+      - name: Run terraform init + validate
+        run: |
+          terraform init -backend-config=env/mgmt-env.tfbackend
+          terraform validate
+
+  plan:
+    name: Terraform plan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.6.7'
+
+      - name: Run terraform init + plan
+        run: |
+          terraform init -backend-config=env/mgmt-env.tfbackend
+          terraform plan -var-file=env/mgmt-env.tfvars -no-color
