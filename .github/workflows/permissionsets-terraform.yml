@@ -6,19 +6,31 @@ on:
     paths:
       - 'management/permission-sets/**'
 
+env:
+  AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
+  AWS_REGION: us-east-1
+
 jobs:
- 
   fmt:
     name: Terraform fmt (check)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.6.7'
+          terraform_version: '1.14.3'
 
       - name: Run terraform fmt check
         run: |
@@ -28,14 +40,23 @@ jobs:
   lint:
     name: TFLint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.6.7'
+          terraform_version: '1.14.3'
 
       - name: Set up TFLint
         uses: terraform-linters/setup-tflint@v1
@@ -49,14 +70,23 @@ jobs:
   init:
     name: Terraform init
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.6.7'
+          terraform_version: '1.14.3'
 
       - name: Run terraform init
         run: |
@@ -65,14 +95,23 @@ jobs:
   validate:
     name: Terraform validate
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.6.7'
+          terraform_version: '1.14.3'
 
       - name: Run terraform init + validate
         run: |
@@ -82,14 +121,23 @@ jobs:
   plan:
     name: Terraform plan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: '1.6.7'
+          terraform_version: '1.14.3'
 
       - name: Run terraform init + plan
         run: |
