@@ -36,7 +36,9 @@ jobs:
         run: |
           terraform --version
           terraform fmt -check -diff
-          - name: Dump repository directory structure
+          
+      - name: Dump repository directory structure
+        run: |
           echo "=== CURRENT DIRECTORY ==="
           pwd
           echo
@@ -51,7 +53,6 @@ jobs:
           echo
           echo "=== FIND BACKEND FILES ==="
           find . -maxdepth 8 -name "*.tfbackend" -print
-
   lint:
     name: TFLint
     runs-on: ubuntu-latest
