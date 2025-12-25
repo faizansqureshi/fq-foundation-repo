@@ -160,4 +160,4 @@ jobs:
           - name: Terraform Init (permission-sets)
   working-directory: management/permission-sets
   run: terraform init -backend-config=env/mgmt-env.tfbackend
-      terraform plan -var-file="env/mgmt-env.tfvars" -out=tfplan.binary
+      terraform plan -var-file="env/mgmt-env.tfvars"
