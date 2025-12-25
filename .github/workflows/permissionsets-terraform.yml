@@ -36,6 +36,21 @@ jobs:
         run: |
           terraform --version
           terraform fmt -check -diff
+          - name: Dump repository directory structure
+          echo "=== CURRENT DIRECTORY ==="
+          pwd
+          echo
+          echo "=== TOP LEVEL FILES ==="
+          ls -la
+          echo
+          echo "=== FIND TERRAFORM FILES ==="
+          find . -maxdepth 6 -name "*.tf" -print
+          echo
+          echo "=== FIND TFVARS FILES ==="
+          find . -maxdepth 8 -name "*.tfvars" -print
+          echo
+          echo "=== FIND BACKEND FILES ==="
+          find . -maxdepth 8 -name "*.tfbackend" -print
 
   lint:
     name: TFLint
