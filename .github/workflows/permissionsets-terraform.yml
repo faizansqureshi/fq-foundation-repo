@@ -90,7 +90,7 @@ jobs:
 
       - name: Run terraform init
         run: |
-          terraform init -backend-config=env/mgmt-env.tfbackend
+          terraform init -backend-config=permission-sets/env/mgmt-env.tfbackend
 
   validate:
     name: Terraform validate
