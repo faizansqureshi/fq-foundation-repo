@@ -5,6 +5,7 @@ on:
     branches: [main, master]
     paths:
       - 'management/permission-sets/**'
+      - '.github/workflows/permissionsets-terraform-deploy.yml'
 
 env:
   AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
@@ -41,6 +42,7 @@ jobs:
         working-directory: management/permission-sets
         run: |
           terraform plan -out=tfplan -var-file=env/mgmt-env.tfvars -no-color -lock=false
+#lock file
 
       - name: Terraform apply
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
