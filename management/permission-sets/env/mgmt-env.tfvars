@@ -1,6 +1,6 @@
 region  = "eu-west-1"
-profile = "AWSMGMT"
-
+# profile = "AWSMGMT"
+# profile no need as we are using the roles now
 permission-sets = {
   "mgmt-permission-set" = {
     name = "mgmt-permission-set"

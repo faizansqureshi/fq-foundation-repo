@@ -14,7 +14,8 @@ terraform {
 
 provider "aws" {
   region  = var.region
-  profile = var.profile
+#  profile = var.profile
+# removing profile as we are using the roles now
 }
 
 
