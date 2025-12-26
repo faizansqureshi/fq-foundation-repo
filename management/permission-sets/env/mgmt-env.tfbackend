@@ -3,4 +3,4 @@
     region         = "eu-west-1"
     dynamodb_table = "state_dynamo_db"
     encrypt        = true
-    profile        = "AWSMGMT"
+   
