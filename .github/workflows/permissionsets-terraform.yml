@@ -1,3 +1,4 @@
+# add the condition for branch name that only fix/feat will run this pipeline
 name: PR Permissionsets Terraform Checks
 
 on:
