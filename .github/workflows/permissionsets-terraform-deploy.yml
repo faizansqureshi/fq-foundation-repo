@@ -41,6 +41,7 @@ jobs:
         working-directory: management/permission-sets
         run: |
           terraform plan -out=tfplan -var-file=env/mgmt-env.tfvars -no-color -lock=false
+#lock file
 
       - name: Terraform apply
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
