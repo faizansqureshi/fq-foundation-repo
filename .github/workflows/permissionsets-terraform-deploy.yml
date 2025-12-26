@@ -1,0 +1,69 @@
+name: Permissionsets Terraform Deploy
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'management/permission-sets/**'
+
+env:
+  AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
+  AWS_REGION: eu-west-1
+
+jobs:
+  deploy:
+    name: Terraform plan & apply (permission-sets)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Terraform init
+        working-directory: management/permission-sets
+        run: |
+          terraform init -backend-config=env/mgmt-env.tfbackend
+
+      - name: Terraform plan
+        working-directory: management/permission-sets
+        run: |
+          terraform plan -out=tfplan -var-file=env/mgmt-env.tfvars -no-color
+
+      - name: Terraform apply
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        working-directory: management/permission-sets
+        run: |
+          terraform apply -input=false -no-color -auto-approve tfplan
+
+      - name: Deployment summary
+        working-directory: management/permission-sets
+        run: |
+          set -euo pipefail
+          echo "Generating deployment summary files..."
+          # Human readable plan
+          terraform show -no-color tfplan > tfplan.txt || true
+          # JSON plan + outputs for parsing / tooling
+          terraform show -json tfplan > tfplan.json || true
+          terraform output -json > outputs.json || true
+
+      - name: Upload deployment summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-summary
+          path: |
+            management/permission-sets/tfplan.txt
+            management/permission-sets/tfplan.json
+            management/permission-sets/outputs.json
