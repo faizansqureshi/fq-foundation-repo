@@ -3,10 +3,7 @@ variable "region"{
   
 }
 
-variable "profile"{          
-
-  
-}
+#variable "profile"{}
 
 
 variable "permission-sets" {

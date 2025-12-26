@@ -8,7 +8,7 @@ on:
 
 env:
   AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
-  AWS_REGION: us-east-1
+  AWS_REGION: eu-west-1
 
 jobs:
   fmt:
