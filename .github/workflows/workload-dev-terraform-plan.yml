@@ -157,7 +157,7 @@ jobs:
           terraform_version: '1.14.3'
 
       - name: Terraform Init + Plan (permission-sets)
-        working-directory: workloads/env/dev-env
+        working-directory: workloads/env
         run: |
-          terraform init -backend-config=dev-env.tfbackend
-          terraform plan -var-file=dev-env.tfvars -no-color -lock=false
+          terraform init -backend-config=dev-env/dev-env.tfbackend
+          terraform plan -var-file=dev-env/dev-env.tfvars -no-color -lock=false
