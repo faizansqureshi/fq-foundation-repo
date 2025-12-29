@@ -4,10 +4,10 @@ variable "region"{
   
 }
 
-variable "profile"{          
+#variable "profile"{          
 
   
-}
+#}
 variable "scps" {
   description = "A map of SCP policies with their details"
   type = map(object({
