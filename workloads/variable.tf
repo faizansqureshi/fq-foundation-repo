@@ -15,9 +15,9 @@ variable "region"{
 
 }
 
-variable "profile"{
-
-}
+#variable "profile"{
+#
+#}
 
 #variable "policies"{
 #
