@@ -1,5 +1,5 @@
 region  = "eu-west-1"
-profile = "AWSMGMT"
+#profile = "AWSMGMT"
 
 
 

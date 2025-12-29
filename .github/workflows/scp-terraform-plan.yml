@@ -1,0 +1,163 @@
+# add the condition for branch name that only fix/feat will run this pipeline
+name: PR Permissionsets Terraform Checks
+
+on:
+  pull_request:
+    branches: [main, master]
+    paths:
+      - 'management/scp/**'
+      - '.github/workflows/scp-terraform-plan.yml'
+env:
+  AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
+  AWS_REGION: eu-west-1
+
+jobs:
+  fmt:
+    name: Terraform fmt (check)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Run terraform fmt check
+        run: |
+          terraform --version
+          terraform fmt -check -diff
+          
+      - name: Dump repository directory structure
+        run: |
+          echo "=== CURRENT DIRECTORY ==="
+          pwd
+          echo
+          echo "=== TOP LEVEL FILES ==="
+          ls -la
+          echo
+          echo "=== FIND TERRAFORM FILES ==="
+          find . -maxdepth 6 -name "*.tf" -print
+          echo
+          echo "=== FIND TFVARS FILES ==="
+          find . -maxdepth 8 -name "*.tfvars" -print
+          echo
+          echo "=== FIND BACKEND FILES ==="
+          find . -maxdepth 8 -name "*.tfbackend" -print
+  lint:
+    name: TFLint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Set up TFLint
+        uses: terraform-linters/setup-tflint@v1
+        with:
+          version: latest
+
+      - name: Run tflint
+        run: |
+          tflint
+
+  init:
+    name: Terraform init
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Run terraform init
+        run: |
+          terraform init
+
+  validate:
+    name: Terraform validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Run terraform init + validate
+        run: |
+          terraform init 
+          terraform validate
+
+  plan:
+    name: Terraform plan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Terraform Init + Plan (permission-sets)
+        working-directory: management/scp
+        run: |
+          terraform init 
+          terraform plan -var-file=scp.tfvars -no-color -lock=false
