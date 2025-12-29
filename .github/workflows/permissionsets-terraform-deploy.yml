@@ -48,7 +48,7 @@ jobs:
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         working-directory: management/permission-sets
         run: |
-          terraform apply -input=false -no-color -auto-approve tfplan
+          terraform apply -input=false -no-color -auto-approve -lock=false tfplan
 
       - name: Deployment summary
         working-directory: management/permission-sets
