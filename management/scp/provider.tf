@@ -14,7 +14,7 @@ terraform {
 
 provider "aws" {
   region  = var.region
-  profile = var.profile
+ # profile = var.profile
 }
 
 
@@ -27,6 +27,6 @@ terraform {
     region         = "eu-west-1"
     dynamodb_table = "state_dynamo_db"
     encrypt        = true
-    profile        = "AWSMGMT"
+  #  profile        = "AWSMGMT"
   }
 }
