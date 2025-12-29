@@ -36,22 +36,22 @@ jobs:
       - name: Terraform init
         working-directory: management/permission-sets
         run: |
-          terraform init -backend-config=env/mgmt-env.tfbackend
+          terraform init 
 
       - name: Terraform plan
-        working-directory: management/permission-sets
+        working-directory: management/scp
         run: |
-          terraform plan -out=tfplan -var-file=env/mgmt-env.tfvars -no-color -lock=false
+          terraform plan -var-file=scp.tfvars -no-color -lock=false
 #lock file
 
       - name: Terraform apply
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        working-directory: management/permission-sets
+        working-directory: management/scp
         run: |
           terraform apply -input=false -no-color -auto-approve -lock=false tfplan
 
       - name: Deployment summary
-        working-directory: management/permission-sets
+        working-directory: management/scp
         run: |
           set -euo pipefail
           echo "Generating deployment summary files..."
@@ -66,6 +66,6 @@ jobs:
         with:
           name: deployment-summary
           path: |
-            management/permission-sets/tfplan.txt
-            management/permission-sets/tfplan.json
-            management/permission-sets/outputs.json
+            management/scp/tfplan.txt
+            management/scp/tfplan.json
+            management/scp/outputs.json
