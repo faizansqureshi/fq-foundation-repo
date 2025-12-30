@@ -1,0 +1,71 @@
+name: Permissionsets Terraform Deploy
+
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - 'workloads/env/dev-env/**'
+      - '.github/workflows/workload-dev-terraform-deploy.yml'
+
+env:
+  AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
+  AWS_REGION: eu-west-1
+
+jobs:
+  deploy:
+    name: Terraform plan & apply (permission-sets)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with: 
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.14.3'
+
+      - name: Terraform init
+        working-directory: workloads
+        run: |
+          terraform init -backend-config=env/dev-env/dev-env.tfbackend
+
+      - name: Terraform plan
+        working-directory: workloads
+        run: |
+          terraform plan -var-file=env/dev-env/dev-env.tfvars -no-color -lock=false
+#lock file
+
+      - name: Terraform apply
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        working-directory: workloads
+        run: |
+          terraform apply -input=false -no-color -auto-approve -lock=false tfplan
+
+      - name: Deployment summary
+        working-directory: workloads
+        run: |
+          set -euo pipefail
+          echo "Generating deployment summary files..."
+          # Human readable plan
+          terraform show -no-color tfplan > tfplan.txt || true
+          # JSON plan + outputs for parsing / tooling
+          terraform show -json tfplan > tfplan.json || true
+          terraform output -json > outputs.json || true
+
+      - name: Upload deployment summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-summary
+          path: |
+            workloads/env/dev-env/tfplan.txt
+            workloads/env/dev-env/tfplan.json
+            workloads/env/dev-env/outputs.json
