@@ -160,4 +160,4 @@ jobs:
        # working-directory: workloads/env/dev-env
         run: |
           terraform init -backend-config=workloads/env/dev-env/dev-env.tfbackend
-          terraform plan -var-file=dev-env/dev-env.tfvars -no-color -lock=false
+          terraform plan -var-file=workloads/env/dev-env/dev-env.tfvars -no-color -lock=false
