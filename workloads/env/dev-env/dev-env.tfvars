@@ -1,4 +1,4 @@
-profile = "fq-dev"
+#profile = "fq-dev"
 region = "eu-west-1"
 
 
