@@ -8,7 +8,7 @@ on:
       - '.github/workflows/workload-dev-terraform-deploy.yml'
 
 env:
-  AWS_ROLE_ARN: arn:aws:iam::851725540634:role/foundation-role  # later we need to move this to secret manager or github secrets
+  AWS_ROLE_ARN: arn:aws:iam::963374505049:role/foundation-role  # later we need to move this to secret manager or github secrets
   AWS_REGION: eu-west-1
 
 jobs:
