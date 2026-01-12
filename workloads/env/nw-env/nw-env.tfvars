@@ -1,4 +1,4 @@
-profile = "fq-personal-network"
+#profile = "fq-personal-network"
 region = "eu-west-1"
 
 workloads = {
