@@ -1,3 +1,4 @@
+#working on this config 
 #profile = "fq-personal-network"
 region = "eu-west-1"
 
