@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowRAMRead",
+      "Effect": "Allow",
+      "Action": [
+        "ram:GetResourceShares",
+        "ram:List*",
+        "ram:GetResourceShareInvitations",
+        "ram:GetResourceShareAssociations"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

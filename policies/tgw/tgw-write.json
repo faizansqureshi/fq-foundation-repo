@@ -1,0 +1,71 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowTransitGatewayWrite",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTransitGateway",
+        "ec2:CreateTransitGatewayRouteTable",
+        "ec2:CreateTags",
+        "ec2:CreateTransitGatewayVpcAttachment",
+        "ec2:CreateTransitGatewayPeeringAttachment"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/pty-${aws:RequestTag/Workload}-${aws:RequestTag/Environment}-*"
+        }
+      }
+    },
+    {
+      "Sid": "AllowTransitGatewayWriteWithResourceTagCondition",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DeleteTransitGatewayRouteTable",
+        "ec2:DeleteTransitGatewayRoute",
+        "ec2:DeleteTransitGateway",
+        "ec2:DeleteTags",
+        "ec2:CreateTransitGatewayRouteTable",
+        "ec2:CreateTransitGatewayRoute",
+        "ec2:AssociateTransitGatewayRouteTable",
+        "ec2:DisassociateTransitGatewayRouteTable",
+        "ec2:DeleteTransitGatewayVpcAttachment",
+        "ec2:DeleteTransitGatewayPeeringAttachment"
+      ],
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/pty-${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+        }
+      },
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowTransitGatewayWriteWithResourceTagCondition2",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTransitGateway"
+      ],
+      "Resource": "arn:aws:ec2:*:*:vpc/vpc*",
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/pty-${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+        }
+      }
+    },
+    {
+      "Sid": "AllowTransitGatewayWriteWithResourceTagCondition4",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTransitGatewayVpcAttachment",
+        "ec2:CreateTransitGatewayPeeringAttachment"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:iam::*:role/pty-${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+        }
+      }
+    }
+  ]
+}
