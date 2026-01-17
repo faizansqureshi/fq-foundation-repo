@@ -4,7 +4,7 @@ region = "eu-west-1"
 
 workloads = {
  nw_foundation = { 
-    create_policy_resources = true
+    create_policy_resources = false
     role_name = "nw_foundation_role"
 github_repos = ["repo:faizansqureshi/fq-foundation-repo:*"]
 identifier = ["arn:aws:iam::865712988430:oidc-provider/token.actions.githubusercontent.com"]
