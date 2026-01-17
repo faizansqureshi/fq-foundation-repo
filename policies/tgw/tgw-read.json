@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowTransitGatewayRead",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeTransitGateway*",
+        "ec2:DescribeTags",
+        "ec2:SearchTransitGatewayRoutes",
+        "ec2:GetTransitGatewayRouteTableAssociations"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

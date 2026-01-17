@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowRAMWrite",
+      "Effect": "Allow",
+      "Action": [
+        "ram:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::*:role/pty-${aws:RequestTag/Workload}-${aws:RequestTag/Environment}-*",
+            "arn:aws:iam::*:role/pty-${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "AllowRAMWithoutResourceTags",
+      "Effect": "Allow",
+      "Action": [
+        "ram:AssociateResourceShare",
+        "ram:DisassociateResourceShare"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

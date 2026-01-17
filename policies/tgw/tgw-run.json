@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:AssociateTransitGatewayRouteTable",
+        "ec2:DisassociateTransitGatewayRouteTable",
+        "ec2:ModifyTransitGateway"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:ResourceTag/Workload": "${aws:PrincipalTag/Workload}",
+          "aws:ResourceTag/Environment": "${aws:PrincipalTag/Environment}"
+        }
+      }
+    }
+  ]
+}

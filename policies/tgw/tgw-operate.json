@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowTransitGatewayOperate",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:EnableTransitGatewayRouteTablePropagation",
+        "ec2:DisableTransitGatewayRouteTablePropagation",
+        "ec2:ModifyTransitGateway"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnLike": {
+          "aws:PrincipalArn": "arn:aws:*::*:*/AWSReservedSSO_${aws:ResourceTag/Workload}-${aws:ResourceTag/Environment}-*"
+        }
+      }
+    }
+  ]
+}
