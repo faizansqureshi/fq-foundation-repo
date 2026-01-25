@@ -5,8 +5,8 @@ on:
   pull_request:
     branches: [main, master]
     paths:
-      - 'policyworkload/env/nw-env/**'
-      - '.github/workflows/policies-nw-non-prod-terraform-plan.yml'
+      - 'policyworkload/env/uat-env/**'
+      - '.github/workflows/policies-uat-terraform-plan.yml'
 env:
   AWS_ROLE_ARN: arn:aws:iam::738232691786:role/foundation-role # later we need to move this to secret manager or github secrets
   AWS_REGION: eu-west-1
