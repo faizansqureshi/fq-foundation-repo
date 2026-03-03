@@ -13,7 +13,7 @@ variable "policies" {
   
 }
 
-variable "create_policy_resources" {
-  
-}
+#variable "create_policy_resources" {
+ 
+#}
 
