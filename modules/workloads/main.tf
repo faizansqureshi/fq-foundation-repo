@@ -3,10 +3,10 @@
 # be using the same polcieis deployed in firs role by giving count variable value false 
 
 
-module "policies" {
-  source = "../../policies"
-  create_policy_resources = var.create_policy_resources
-}
+#module "policies" {
+#  source = "../../policies"
+#  create_policy_resources = var.create_policy_resources
+#}
 
 module "role" {
   source             = "../roles"
@@ -14,6 +14,6 @@ module "role" {
   role_description   = "The role is for account deployment"
   role_assume_policy = data.aws_iam_policy_document.github_assume_role_policy.json
   role_managed_policy_arns = local.policies_arns
-depends_on = [ module.policies ]
+#depends_on = [ module.policies ]
 }
 
