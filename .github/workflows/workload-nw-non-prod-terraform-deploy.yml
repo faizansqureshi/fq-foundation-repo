@@ -5,7 +5,7 @@ on:
     branches: [main, master]
     paths:
       - 'workloads/env/nw-env/**'
-      - '.github/workflows/workload-nw-non-prod-terraform-plan.yml'
+      - '.github/workflows/workload-nw-non-prod-terraform-deploy.yml'
 # note: the deploy workflow only runs on pushes to main/master; tfvars
 # changes under workloads/env/nw-env will trigger the plan workflow above.
 
