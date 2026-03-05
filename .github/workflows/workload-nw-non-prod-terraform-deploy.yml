@@ -6,6 +6,8 @@ on:
     paths:
       - 'workloads/env/nw-env/**'
       - '.github/workflows/workload-nw-non-prod-terraform-plan.yml'
+# note: the deploy workflow only runs on pushes to main/master; tfvars
+# changes under workloads/env/nw-env will trigger the plan workflow above.
 
 env:
   AWS_ROLE_ARN: arn:aws:iam::865712988430:role/foundation-role   # later we need to move this to secret manager or github secrets

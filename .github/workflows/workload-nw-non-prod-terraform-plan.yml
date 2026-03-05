@@ -3,7 +3,7 @@ name: PR Permissionsets Terraform Checks
 
 on:
   pull_request:
-    branches: [main, master]
+    # run for PRs targeting any branch; file matching still required
     paths:
       - 'workloads/env/nw-env/**'
       - '.github/workflows/workload-nw-non-prod-terraform-plan.yml'
