@@ -20,7 +20,8 @@ data "aws_iam_policy_document" "vpc_run" {
 }
 
 data "aws_iam_policy_document" "vpc_write" {
-  source_policy_documents = [file("${path.module}/vpc/vpc-write.json")]
+  source_policy_documents = [file("${path.module}/vpc/vpc-write.json"),
+  file("${path.module}/vpc/vpc-read.json")]
                    
 }
 
@@ -36,6 +37,7 @@ resource "aws_iam_policy" "vpc_read" {
     ignore_changes = [tags["Creation Date"]]
   }
 }
+
 
 resource "aws_iam_policy" "vpc_write" {
   count       = var.create_policy_resources ? 1 : 0
