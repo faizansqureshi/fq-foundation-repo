@@ -9,13 +9,13 @@ workloads = {
     role_name = "dev_foundation_role"
 github_repos = ["repo:faizansqureshi/fq-foundation-repo:*"]
 identifier = ["arn:aws:iam::963374505049:oidc-provider/token.actions.githubusercontent.com"]
-policies = []
+policies = ["fq-vpc-read"]
 },
  compute_role = { 
     create_policy_resources = false
     role_name = "dev_compute_role"
 github_repos = ["repo:faizansqureshi/fq-foundation-repo:*"]
 identifier = ["arn:aws:iam::963374505049:oidc-provider/token.actions.githubusercontent.com"]
-policies = []
+policies = ["fq-vpc-read"]
 }}
 
