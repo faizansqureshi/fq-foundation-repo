@@ -9,7 +9,7 @@
 #   target_type        = "AWS_ACCOUNT"
 # }
 
-
+#test
 resource "aws_ssoadmin_account_assignment" "example_user_assignment" {
   for_each = var.account_assignments
   instance_arn       = local.instance_store_arn
