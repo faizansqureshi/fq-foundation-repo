@@ -60,16 +60,14 @@ permission-sets = {
     ]
     custom_policy_names = []
     account_assignments = {
-   "fq-dev" = {
+      "fq-dev" = {
         principal_type = "USER"
         principal_id   = "c23514f4-f0b1-70e6-468d-3d458814ffc0"
         account_id     = "963374505049"
       }
-
+    }
   }
 }
-
-
 
 # account_permission = {
 #   "account_a":{
