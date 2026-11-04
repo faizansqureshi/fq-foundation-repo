@@ -13,15 +13,15 @@ terraform {
 }
 
 provider "aws" {
-  region  = var.region
-#  profile = var.profile
-# removing profile as we are using the roles now
+  region = var.region
+  #  profile = var.profile
+  # removing profile as we are using the roles now
 }
 
 
 
 terraform {
   backend "s3" {
-    
+
   }
 }

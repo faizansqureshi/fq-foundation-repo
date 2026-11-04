@@ -1,4 +1,4 @@
-region  = "eu-west-1"
+region = "eu-west-1"
 # profile = "AWSMGMT"
 # profile no need as we are using the roles now
 
@@ -9,17 +9,17 @@ permission-sets = {
       "arn:aws:iam::aws:policy/AdministratorAccess",
       "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
     ]
-  
+
     custom_policy_names = []
     # inline_policy = {}
 
     account_assignments = {
-      "fq-dev": {
+      "fq-dev" : {
         principal_type = "USER"
         principal_id   = "c23514f4-f0b1-70e6-468d-3d458814ffc0"
         account_id     = "963374505049"
       },
-            "fq-network": {
+      "fq-network" : {
         principal_type = "GROUP"
         principal_id   = "22252494-1031-708e-d79c-40bed9c927e3"
         account_id     = "865712988430"
@@ -33,7 +33,7 @@ permission-sets = {
     ]
     custom_policy_names = []
     # inline_policy = {}
-account_assignments ={}
+    account_assignments = {}
   },
   "mgmt-readonly-permission-set-2" = {
     name = "mgmt-readonly-permission-set-2"
@@ -42,27 +42,27 @@ account_assignments ={}
     ]
     custom_policy_names = []
     # inline_policy = {}
-    account_assignments ={}
+    account_assignments = {}
   }
 
-    "mgmt-readonly-test-set-2" = {
+  "mgmt-readonly-test-set-2" = {
     name = "mgmt-readonly-test-set-2"
     managed_policy_arns = [
       "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess"
     ]
     custom_policy_names = []
     # inline_policy = {}
-    account_assignments ={}
+    account_assignments = {}
   }
 
-   "s3-full-permission-set" = {
-    name = "s3-full-permission-set"
+  "s3-full-permission-set" = {
+    name = "s3-full-read"
     managed_policy_arns = [
       "arn:aws:iam::aws:policy/AmazonS3FullAccess"
     ]
     custom_policy_names = []
     # inline_policy = {}
-account_assignments ={}
+    account_assignments = {}
   },
 }
 
