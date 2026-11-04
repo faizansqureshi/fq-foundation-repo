@@ -34,7 +34,6 @@ permission-sets = {
     custom_policy_names = []
     # inline_policy = {}
 account_assignments ={}
-
   },
   "mgmt-readonly-permission-set-2" = {
     name = "mgmt-readonly-permission-set-2"
@@ -55,6 +54,16 @@ account_assignments ={}
     # inline_policy = {}
     account_assignments ={}
   }
+
+   "s3-full-permission-set" = {
+    name = "s3-full-permission-set"
+    managed_policy_arns = [
+      "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+    ]
+    custom_policy_names = []
+    # inline_policy = {}
+account_assignments ={}
+  },
 }
 
 
