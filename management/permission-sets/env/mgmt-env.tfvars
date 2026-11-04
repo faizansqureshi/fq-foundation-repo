@@ -55,8 +55,8 @@ account_assignments ={}
     account_assignments ={}
   }
 
-   "s3-full-access-read-permission-set" = {
-    name = "s3-full-access-read-permission-set"
+   "s3-full-permission-set" = {
+    name = "s3-full-permission-set"
     managed_policy_arns = [
       "arn:aws:iam::aws:policy/AmazonS3FullAccess"
     ]
